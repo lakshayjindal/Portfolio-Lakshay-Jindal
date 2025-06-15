@@ -1,13 +1,25 @@
-{% extends 'base.html' %} {% block title %}Contact Us{% endblock title %} {%
-block body %}
+{% extends 'base.html' %} {% block title %}Contact Us{% endblock title %} 
+{% block body %}
+
+{% if messages %}
+  <div style="margin: 10px 0;">
+    {% for message in messages %}
+      <div style="padding: 10px; border-radius: 5px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; font-family: sans-serif;">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
 <div class="contactform">
   <h1>Contact me For work / General Enquiries</h1>
-  <form method="post" action="contact.html">
+  <form method="post" action="{% url 'contactus' %}">
+    {% csrf_token %}
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
       <input
         type="email"
+        name='email'
         class="form-control"
         id="clientemail"
         aria-describedby="emailHelp"
@@ -20,6 +32,7 @@ block body %}
       <label for="exampleInputEmail1" class="form-label">Name</label>
       <input
         type="name"
+        name='name'
         class="form-control"
         id="clientname"
         aria-describedby="emailHelp"
@@ -27,12 +40,11 @@ block body %}
     </div>
     <div class="mb-3">
       <label for="clientphone" class="form-label">Phone Number</label>
-      <input type="phone" class="form-control" id="phone" />
+      <input type="phone" class="form-control" id="phone" name='phone'/>
     </div>
     <div class="mb-3" id="form-check">
-      <input type="checkbox" class="form-check-input" id="isclient" />
-      <label class="form-check-label" for="isclient"
-        >I want you to work on a project with me</label
+      <input type="checkbox" class="form-check-input" id="isclient" name="isClient"/>
+      <label class="form-check-label" for="isclient" name="isClient">I want you to work on a project with me</label
       >
     </div>
     <button type="submit" class="btn-sm btn-primary" id="submit">Submit</button>

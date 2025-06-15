@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -74,6 +75,7 @@
         flex-direction: column;
       }
       .devpic img {
+        box-shadow: 0px 0px 20px 3px black;
         width: 20vw;
         height: 55vh;
         border-radius: 30%;
@@ -274,6 +276,8 @@
         }
       }
     </style>
+
+    {% block extra_head %}{% endblock extra_head %}
   </head>
   <body>
     {% load static %}
@@ -281,19 +285,19 @@
       <div class="sidebar sidebargo">
         <nav>
           <ul>
-            <li><a href="index">Home</a></li>
-            <li><a href="intro">My Intro</a></li>
-            <li><a href="service">Services</a></li>
-            <li><a href="blog">Blogs</a></li>
-            <li><a href="contact">Contact Us</a></li>
+            <li><a href="{% url 'Homepage' %}">Home</a></li>
+            <li><a href="{% url 'Introduction' %}">My Intro</a></li>
+            <li><a href="{% url 'services' %}">Services</a></li>
+            <li><a href="{% url 'blogs' %}">Blogs</a></li>
+            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
           </ul>
         </nav>
       </div>
     </div>
     <div class="main">
       <div class="hamburger">
-        <img src="../static/menu.png" class="ham" alt="open" \>
-        <img src="../static/close.png" class="cross" alt="close" \>
+        <img src="{% static "/menu.png" %}" class="ham" alt="open" \>
+        <img src="{% static "/close.png" %}" class="cross" alt="close" \>
       </div>
     </div>
     {% block body %} {% endblock body %}
